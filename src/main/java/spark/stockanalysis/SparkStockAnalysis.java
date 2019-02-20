@@ -15,6 +15,7 @@ import org.apache.spark.streaming.api.java.JavaPairDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.apache.spark.SparkContext;
 import scala.Tuple2;
 
 public class SparkStockAnalysis {
@@ -58,7 +59,7 @@ public class SparkStockAnalysis {
 					}
 				});
 		
-		JavaPairDStream<String, MaxTuple> result=pair.reduceByKeyAndWindow(
+		JavaPairDStream<String, MaxTuple> result= lines.reduceByKeyAndWindow(
 				new Function2<MaxTuple, MaxTuple, MaxTuple>() 
 				{
 					private static final long serialVersionUID = 76761212;
